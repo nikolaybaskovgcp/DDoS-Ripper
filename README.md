@@ -62,6 +62,11 @@ Install Brew and Install dependencies (python 3)
 
 Copy and edit file `.env.example` to `.env`, enter correct values. 
 
+Use env variables:
+
+- `USE_PROXYCHAIN=yes` - for using proxychains4 
+- `START_DELAY=30` - seconds for wainting to start protonVPN
+
 # Note:
 If you find any problems than please write on issue github and to our Telegram Group. Don't use for revenge! Make sure your anonymity!
 It's made for just testing purpose.
