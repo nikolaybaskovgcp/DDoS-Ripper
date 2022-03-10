@@ -1,0 +1,41 @@
+version: '3.0'
+services:
+  dripper:
+    image: dr:v3
+    command: -s ${DRIPPER_IP} -p ${DRIPPER_PORT}
+    entrypoint: /app/docker-entrypoint.sh
+    environment:
+      USE_PROXYCHAIN: "yes"
+      START_DELAY: 30
+    depends_on:
+      - vpn
+    userns_mode: host
+    # Do not apply any networking configs
+    # on this container!
+    # All networking labels and settings should be defined
+    # on the vpn container.
+    network_mode: service:vpn
+    volumes:
+      - ./proxychains.conf:/etc/proxychains.conf
+
+  vpn:
+    image: ghcr.io/tprasadtp/protonvpn:latest
+    container_name: protonvpn
+    environment:
+      PROTONVPN_USERNAME: ${PROTONVPN_USERNAME}
+      PROTONVPN_PASSWORD: ${PROTONVPN_PASSWORD}
+      PROTONVPN_TIER: ${PROTONVPN_TIER}
+      PROTONVPN_COUNTRY: ${PROTONVPN_COUNTRY}
+      PROTONVPN_SERVER: ${PROTONVPN_SERVER}
+    cap_add:
+    - NET_ADMIN
+    devices:
+    - "/dev/net/tun"
+    networks:
+      - internet
+      - proxy
+
+networks:
+  internet:
+  proxy:
+    internal: true
