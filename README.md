@@ -57,6 +57,11 @@ To use the application, type in the following commands in GNU/Linux terminal.
 
 Install Brew and Install dependencies (python 3)
 
+
+## For Docker
+
+Copy and edit file `.env.example` to `.env`, enter correct values. 
+
 # Note:
 If you find any problems than please write on issue github and to our Telegram Group. Don't use for revenge! Make sure your anonymity!
 It's made for just testing purpose.
